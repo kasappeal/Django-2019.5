@@ -5,3 +5,6 @@ venv/
 # PyCharm & VSCode
 .idea/
 .vscode/
+
+# SQLite
+*.sqlite3
