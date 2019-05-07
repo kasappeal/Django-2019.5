@@ -9,7 +9,9 @@
     <hr>
     <h2>Latest photos</h2>
     {% for photo in latest_photos %}
-        <img src="{{ photo.url }}" alt="{{ photo.description }}" title="{{ photo.name }}" height="200">
+        <a href="{% url 'photo_detail' photo.pk %}">
+            <img src="{{ photo.url }}" alt="{{ photo.description }}" title="{{ photo.name }}" height="200">
+        </a>
     {% endfor %}
 </body>
 </html>

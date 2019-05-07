@@ -21,6 +21,6 @@ from photos.views import latest_photos, photo_detail
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('photos/<int:pk>/', photo_detail),
-    path('', latest_photos)
+    path('photos/<int:pk>/', photo_detail, name='photo_detail'),
+    path('', latest_photos, name='home')
 ]
