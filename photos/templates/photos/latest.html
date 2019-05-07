@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Frikr</title>
+</head>
+<body>
+    <h1>Frikr</h1>
+    <hr>
+    {% for photo in latest_photos %}
+        <img src="{{ photo.url }}" alt="{{ photo.description }}" title="{{ photo.name }}" height="200">
+    {% endfor %}
+</body>
+</html>
