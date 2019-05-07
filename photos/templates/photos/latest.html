@@ -7,6 +7,7 @@
 <body>
     <h1>Frikr</h1>
     <hr>
+    <h2>Latest photos</h2>
     {% for photo in latest_photos %}
         <img src="{{ photo.url }}" alt="{{ photo.description }}" title="{{ photo.name }}" height="200">
     {% endfor %}

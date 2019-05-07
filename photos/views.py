@@ -6,10 +6,10 @@ from photos.models import Photo
 
 def latest_photos(request):
     # Recuperar las últimas fotos de la base de datos
-    photos = Photo.objects.all()
+    photos = Photo.objects.all().order_by('-modification_date')
 
     # Creamos el contexto para pasarle las fotos a la plantilla
-    context = {'latest_photos': photos}
+    context = {'latest_photos': photos[:5]}
 
     # Crear respuesta HTML con las fotos
     html = render(request, 'photos/latest.html', context)
