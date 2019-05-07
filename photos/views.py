@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from photos.models import Photo
 
@@ -20,10 +20,7 @@ def latest_photos(request):
 
 def photo_detail(request, pk):
     # Recuperar la foto seleccionada de la base de datos
-    try:
-        photo = Photo.objects.get(pk=pk)
-    except Photo.DoesNotExist:
-        return HttpResponseNotFound('Photo does not exist')
+    photo = get_object_or_404(Photo, pk=pk)
 
     # Crear un contexto para pasar la información a la plantilla
     context = {'photo': photo}
