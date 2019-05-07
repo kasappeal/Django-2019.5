@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Frikr</title>
-</head>
-<body>
-    <h1>Frikr</h1>
-    <hr>
+{% extends 'base.html' %}
+
+{% block main_title %} Frikr {% endblock %}
+
+{% block main_content %}
     <h2>Latest photos</h2>
     {% for photo in latest_photos %}
         <a href="{% url 'photo_detail' photo.pk %}">
             <img src="{{ photo.url }}" alt="{{ photo.description }}" title="{{ photo.name }}" height="200">
         </a>
     {% endfor %}
-</body>
-</html>
+{% endblock %}
