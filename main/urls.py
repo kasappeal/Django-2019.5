@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from photos.views import latest_photos
+from photos.views import latest_photos, photo_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('photos/<int:pk>/', photo_detail),
     path('', latest_photos)
 ]

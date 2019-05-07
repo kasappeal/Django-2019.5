@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ photo.name }}</title>
+</head>
+<body>
+    <h1>{{ photo.name }}</h1>
+    <img src="{{ photo.url }}" alt="{{ photo.description }}" title="{{ photo.name }}" width="500">
+    <p>Published on {{ photo.creation_date }} under {{ photo.license }} license</p>
+    <p>{{ photo.description }}</p>
+</body>
+</html>
