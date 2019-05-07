@@ -7,7 +7,7 @@
 <body>
     <h1>{{ photo.name }}</h1>
     <img src="{{ photo.url }}" alt="{{ photo.description }}" title="{{ photo.name }}" width="500">
-    <p>Published on {{ photo.creation_date }} under {{ photo.license }} license</p>
+    <p>Published on {{ photo.creation_date|date:'d/m/Y' }} under {{ photo.get_license_display }} license</p>
     <p>{{ photo.description }}</p>
 </body>
 </html>
