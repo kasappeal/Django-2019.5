@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head_title %} New photo {% endblock %}
+
+{% block main_title %} New photo {% endblock %}
+
+{% block main_content %}
+    {% for message in messages %}
+        <p style="color:green">{{ message }}</p>
+    {% endfor %}
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save photo</button>
+    </form>
+{% endblock %}

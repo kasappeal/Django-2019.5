@@ -1,6 +1,8 @@
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 
+from photos.forms import PhotoForm
 from photos.models import Photo
 
 
@@ -30,3 +32,16 @@ def photo_detail(request, pk):
 
     # Devolver respuesta HTTP
     return HttpResponse(html)
+
+
+def new_photo(request):
+    if request.method == 'POST':
+        form = PhotoForm(request.POST)
+        if form.is_valid():
+            new_photo = form.save()
+            messages.success(request, 'Foto creada correctamente con ID {0}'.format(new_photo.pk))
+            form = PhotoForm()
+    else:
+        form = PhotoForm()
+    context = {'form': form}
+    return render(request, 'photos/new.html', context)
