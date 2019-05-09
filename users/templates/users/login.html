@@ -10,12 +10,7 @@
     {% endfor %}
     <form method="post">
         {% csrf_token %}
-        <div>
-            <input type="text" name="usr" placeholder="Username" required>
-        </div>
-        <div>
-            <input type="password" name="pwd" placeholder="Password" required>
-        </div>
+        {{ form.as_p }}
         <div>
             <button type="submit">Login</button>
         </div>
