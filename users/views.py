@@ -5,6 +5,8 @@ from django.contrib.auth import login as django_login, logout as django_logout
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         username = request.POST['usr']
         password = request.POST['pwd']
