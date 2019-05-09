@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head_title %} Login {% endblock %}
+
+{% block main_title %} Login {% endblock %}
+
+{% block main_content %}
+    {% for message in messages %}
+        <p style="color:red">{{ message }}</p>
+    {% endfor %}
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <input type="text" name="usr" placeholder="Username" required>
+        </div>
+        <div>
+            <input type="password" name="pwd" placeholder="Password" required>
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+{% endblock %}
