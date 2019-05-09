@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path
 
 from photos.views import latest_photos, photo_detail
-from users.views import login
+from users.views import login, logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Users
     path('login', login, name='login'),
+    path('logout', logout, name='logout'),
     # Photos
     path('photos/<int:pk>/', photo_detail, name='photo_detail'),
     path('', latest_photos, name='home')
