@@ -36,7 +36,9 @@ def photo_detail(request, pk):
 
 def new_photo(request):
     if request.method == 'POST':
-        form = PhotoForm(request.POST)
+        photo = Photo()
+        photo.owner = request.user
+        form = PhotoForm(request.POST, instance=photo)
         if form.is_valid():
             new_photo = form.save()
             messages.success(request, 'Foto creada correctamente con ID {0}'.format(new_photo.pk))
