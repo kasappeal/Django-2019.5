@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 
@@ -34,6 +35,7 @@ def photo_detail(request, pk):
     return HttpResponse(html)
 
 
+@login_required
 def new_photo(request):
     if request.method == 'POST':
         photo = Photo()
