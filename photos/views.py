@@ -12,7 +12,7 @@ class LatestPhotosView(View):
 
     def get(self, request):
         # Recuperar las últimas fotos de la base de datos
-        photos = Photo.objects.filter(visibility=Photo.PUBLIC).order_by('-modification_date')
+        photos = Photo.objects.filter(visibility=Photo.PUBLIC).order_by('-modification_date').select_related('owner')
 
         # Creamos el contexto para pasarle las fotos a la plantilla
         context = {'latest_photos': photos[:5]}
@@ -28,7 +28,7 @@ class PhotoDetailView(View):
 
     def get(self, request, pk):
         # Recuperar la foto seleccionada de la base de datos
-        photo = get_object_or_404(Photo, pk=pk, visibility=Photo.PUBLIC)
+        photo = get_object_or_404(Photo.objects.select_related('owner'), pk=pk, visibility=Photo.PUBLIC)
 
         # Crear un contexto para pasar la información a la plantilla
         context = {'photo': photo}

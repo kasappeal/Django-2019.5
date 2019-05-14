@@ -6,7 +6,7 @@
     <h2>Latest photos</h2>
     {% for photo in latest_photos %}
         <a href="{% url 'photo_detail' photo.pk %}">
-            <img src="{{ photo.url }}" alt="{{ photo.description }}" title="{{ photo.name }}" height="200">
+            <img src="{{ photo.url }}" alt="{{ photo.description }}" title="{{ photo.name }} by {{ photo.owner.first_name }} {{ photo.owner.last_name }}" height="200">
         </a>
     {% endfor %}
 {% endblock %}
