@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views import View
+from django.views.generic import ListView
 
 from photos.forms import PhotoForm
 from photos.models import Photo
@@ -57,3 +59,16 @@ class NewPhotoView(LoginRequiredMixin, View):
             form = PhotoForm()
         context = {'form': form}
         return render(request, 'photos/new.html', context)
+
+
+class PhotoListView(ListView):
+
+    template_name = 'photos/list.html'
+
+    def get_queryset(self):
+        queryset = Photo.objects.select_related('owner').order_by('-modification_date')
+        if not self.request.user.is_authenticated:
+            queryset = queryset.filter(visibility=Photo.PUBLIC)
+        elif not self.request.user.is_superuser:
+            queryset = queryset.filter(Q(visibility=Photo.PUBLIC) | Q(owner=self.request.user))
+        return queryset

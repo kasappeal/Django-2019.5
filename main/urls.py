@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from photos.views import LatestPhotosView, PhotoDetailView, NewPhotoView
+from photos.views import LatestPhotosView, PhotoDetailView, NewPhotoView, PhotoListView
 from users.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -25,6 +25,7 @@ urlpatterns = [
     path('login', LoginView.as_view(), name='login'),
     path('logout', LogoutView.as_view(), name='logout'),
     # Photos
+    path('photos/', PhotoListView.as_view(), name='photo_list'),
     path('photos/new/', NewPhotoView.as_view(), name='new_photo'),
     path('photos/<int:pk>/', PhotoDetailView.as_view(), name='photo_detail'),
     path('', LatestPhotosView.as_view(), name='home')
