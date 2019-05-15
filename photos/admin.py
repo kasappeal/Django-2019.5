@@ -10,7 +10,22 @@ class PhotoAdmin(admin.ModelAdmin):
     list_display = ['get_img', 'name', 'license', 'visibility', 'get_owner_name']
     list_filter = ['license', 'visibility', 'owner']
     search_fields = ['name', 'description', 'url', 'owner__first_name', 'owner__last_name']
-    readonly_fields = ['get_img', 'get_owner_name']
+    readonly_fields = ['get_img', 'get_owner_name', 'creation_date', 'modification_date']
+    fieldsets = [
+        [None, {
+            'fields': ['name', 'get_img', 'url']
+        }],
+        ['Properties', {
+            'fields': ['owner', 'license', 'visibility']
+        }],
+        ['Description', {
+            'fields': ['description']
+        }],
+        ['Dates', {
+            'fields': ['creation_date', 'modification_date'],
+            'classes': ['collapse']
+        }]
+    ]
 
     def get_owner_name(self, obj):
         return '{0} {1}'.format(obj.owner.first_name, obj.owner.last_name)
