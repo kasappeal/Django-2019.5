@@ -4,6 +4,11 @@ from django.utils.safestring import mark_safe
 from photos.models import Photo
 
 
+admin.site.site_title = 'Frikr Admin System'
+admin.site.site_header = 'Frikr Admin System'
+admin.site.index_title = 'Frikr Admin System'
+
+
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
 
