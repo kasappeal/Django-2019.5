@@ -7,6 +7,7 @@ from photos.models import Photo
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
 
+    list_select_related = ['owner']
     list_display = ['get_img', 'name', 'license', 'visibility', 'get_owner_name']
     list_filter = ['license', 'visibility', 'owner']
     search_fields = ['name', 'description', 'url', 'owner__first_name', 'owner__last_name']
