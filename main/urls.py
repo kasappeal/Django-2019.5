@@ -15,11 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework.routers import SimpleRouter
 
-from photos.api import PhotosAPI, PhotoDetailAPI
+from photos.api import PhotosViewSet
 from photos.views import LatestPhotosView, PhotoDetailView, NewPhotoView, PhotoListView
-from users.api import UsersAPI, UserDetailAPI
+from users.api import UsersViewSet
 from users.views import LoginView, LogoutView
+
+router = SimpleRouter()
+router.register('api/photos', PhotosViewSet, basename='photos_api')
+router.register('api/users', UsersViewSet, basename='users_api')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,9 +36,4 @@ urlpatterns = [
     path('photos/new/', NewPhotoView.as_view(), name='new_photo'),
     path('photos/<int:pk>/', PhotoDetailView.as_view(), name='photo_detail'),
     path('', LatestPhotosView.as_view(), name='home'),
-    # API
-    path('api/users/<int:pk>', UserDetailAPI.as_view(), name='user_detail_api'),
-    path('api/users/', UsersAPI.as_view(), name='users_api'),
-    path('api/photos/<int:pk>', PhotoDetailAPI.as_view(), name='photo_detail_api'),
-    path('api/photos/', PhotosAPI.as_view(), name='photos_api')
-]
+] + router.urls
