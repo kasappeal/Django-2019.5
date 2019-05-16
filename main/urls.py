@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from photos.views import LatestPhotosView, PhotoDetailView, NewPhotoView, PhotoListView
-from users.api import UsersAPI
+from users.api import UsersAPI, UserDetailAPI
 from users.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -31,5 +31,6 @@ urlpatterns = [
     path('photos/<int:pk>/', PhotoDetailView.as_view(), name='photo_detail'),
     path('', LatestPhotosView.as_view(), name='home'),
     # API
+    path('api/users/<int:pk>', UserDetailAPI.as_view(), name='user_detail_api'),
     path('api/users/', UsersAPI.as_view(), name='users_api')
 ]
