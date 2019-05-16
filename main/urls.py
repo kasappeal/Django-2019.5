@@ -13,10 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import SimpleRouter
 
+from files.views import FileViewSet
 from photos.api import PhotosViewSet
 from photos.views import LatestPhotosView, PhotoDetailView, NewPhotoView, PhotoListView
 from users.api import UsersViewSet
@@ -25,6 +28,7 @@ from users.views import LoginView, LogoutView
 router = SimpleRouter()
 router.register('api/photos', PhotosViewSet, basename='photos_api')
 router.register('api/users', UsersViewSet, basename='users_api')
+router.register('api/files', FileViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,4 +40,4 @@ urlpatterns = [
     path('photos/new/', NewPhotoView.as_view(), name='new_photo'),
     path('photos/<int:pk>/', PhotoDetailView.as_view(), name='photo_detail'),
     path('', LatestPhotosView.as_view(), name='home'),
-] + router.urls
+] + router.urls + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
