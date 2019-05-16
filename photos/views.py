@@ -61,9 +61,7 @@ class NewPhotoView(LoginRequiredMixin, View):
         return render(request, 'photos/new.html', context)
 
 
-class PhotoListView(ListView):
-
-    template_name = 'photos/list.html'
+class PhotoList(object):
 
     def get_queryset(self):
         queryset = Photo.objects.select_related('owner').order_by('-modification_date')
@@ -72,3 +70,9 @@ class PhotoListView(ListView):
         elif not self.request.user.is_superuser:
             queryset = queryset.filter(Q(visibility=Photo.PUBLIC) | Q(owner=self.request.user))
         return queryset
+
+
+class PhotoListView(PhotoList, ListView):
+
+    template_name = 'photos/list.html'
+

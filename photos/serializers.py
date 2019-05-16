@@ -16,4 +16,4 @@ class PhotoSerializer(ModelSerializer):
         model = Photo
         fields = ['id', 'name', 'url', 'description', 'creation_date', 'modification_date',
                   'license', 'visibility', 'owner']
-        read_only_fields = ['id', 'creation_date', 'modification_date']
+        read_only_fields = ['id', 'creation_date', 'modification_date', 'owner']
