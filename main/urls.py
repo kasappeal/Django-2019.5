@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from photos.api import PhotosAPI
+from photos.api import PhotosAPI, PhotoDetailAPI
 from photos.views import LatestPhotosView, PhotoDetailView, NewPhotoView, PhotoListView
 from users.api import UsersAPI, UserDetailAPI
 from users.views import LoginView, LogoutView
@@ -34,5 +34,6 @@ urlpatterns = [
     # API
     path('api/users/<int:pk>', UserDetailAPI.as_view(), name='user_detail_api'),
     path('api/users/', UsersAPI.as_view(), name='users_api'),
+    path('api/photos/<int:pk>', PhotoDetailAPI.as_view(), name='photo_detail_api'),
     path('api/photos/', PhotosAPI.as_view(), name='photos_api')
 ]
